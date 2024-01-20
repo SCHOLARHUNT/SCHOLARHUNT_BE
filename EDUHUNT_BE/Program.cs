@@ -18,16 +18,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 // builder 
- builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")??
-        throw new InvalidOperationException("Connection String is not found")
-    
-    ));
+builder.Services.AddDbContext<AppDbContext>(options =>
+   options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection") ??
+       throw new InvalidOperationException("Connection String is not found")
+
+   ));
 // ADD Identity & JWT AUTHENTICATION
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddSignInManager()
     .AddRoles<IdentityRole>();
+builder.Services.AddScoped<IScholarship, ScholarshipRepository>();
 
 
 // ADD JWT AUTHENTICATION
@@ -40,7 +41,7 @@ builder.Services.AddAuthentication(options =>
 
     options.TokenValidationParameters = new TokenValidationParameters
     {
-        ValidateIssuer = true,    
+        ValidateIssuer = true,
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
@@ -56,9 +57,9 @@ builder.Services.AddSwaggerGen(options =>
 {
     options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
     {
-       In = ParameterLocation.Header,   
-       Name = "Authorization",
-       Type = SecuritySchemeType.ApiKey,
+        In = ParameterLocation.Header,
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
     });
     options.OperationFilter<SecurityRequirementsOperationFilter>();
 });

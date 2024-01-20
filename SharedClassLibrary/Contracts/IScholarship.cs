@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// IScholarship interface
+using SharedClassLibrary.DTOs;
+using static SharedClassLibrary.DTOs.ServiceResponses;
 
 namespace SharedClassLibrary.Contracts
 {
-    internal interface IScholarship
+    public interface IScholarship
     {
+        Task<List<ScholarshipDTO>> GetScholarships();
+        Task AddScholarship(ScholarshipDTO scholarship);
     }
 }
