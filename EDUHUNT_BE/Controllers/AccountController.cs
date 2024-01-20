@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SharedClassLibrary.Contracts;
 using SharedClassLibrary.DTOs;
 
@@ -28,6 +27,6 @@ namespace EDUHUNT_BE.Controllers
         {
             var response = await userAccount.LogoutAccount();
             return Ok(response);
-        }   
+        }
     }
 }
