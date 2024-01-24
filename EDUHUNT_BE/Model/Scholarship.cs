@@ -2,7 +2,7 @@
 {
     public class ScholarshipInfo
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
         public decimal Budget { get; set; }
         public string Title { get; set; }
         public string Location { get; set; }

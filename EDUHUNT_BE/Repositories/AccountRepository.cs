@@ -65,20 +65,20 @@ namespace EDUHUNT_BE.Repositories
         public async Task<LoginResponse> LoginAccount(LoginDTO loginDTO)
         {
             if (loginDTO == null)
-                return new LoginResponse(false, null!, "Login container is empty");
+                return new LoginResponse(false, null!, null!, "Login container is empty");
 
             var getUser = await userManager.FindByEmailAsync(loginDTO.Email);
             if (getUser is null)
-                return new LoginResponse(false, null!, "User not found");
+                return new LoginResponse(false, null!, null!, "User not found");
 
             bool checkUserPasswords = await userManager.CheckPasswordAsync(getUser, loginDTO.Password);
             if (!checkUserPasswords)
-                return new LoginResponse(false, null!, "Invalid email/password");
+                return new LoginResponse(false, null!, null!, "Invalid email/password");
 
             var getUserRole = await userManager.GetRolesAsync(getUser);
             var userSession = new UserSession(getUser.Id, getUser.Name, getUser.Email, getUserRole.First());
             string token = GenerateToken(userSession);
-            return new LoginResponse(true, token!, "Login completed");
+            return new LoginResponse(true, token!, getUser.Id, "Login completed");
         }
 
         public Task<LoginResponse> LogoutAccount()

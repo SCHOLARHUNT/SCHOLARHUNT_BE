@@ -1,7 +1,12 @@
-﻿using EDUHUNT_BE.Data;
-using EDUHUNT_BE.Model;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using EDUHUNT_BE.Data;
+using EDUHUNT_BE.Model;
 
 namespace EDUHUNT_BE.Controllers
 {
@@ -18,18 +23,16 @@ namespace EDUHUNT_BE.Controllers
 
         // GET: api/ScholarshipInfoes
         [HttpGet]
-        public async Task<IActionResult> GetScholarshipInfo()
+        public async Task<ActionResult<IEnumerable<ScholarshipInfo>>> GetScholarshipInfos()
         {
-
-            return Ok(await _context.ScholarshipInfo.ToListAsync());
-
+            return await _context.ScholarshipInfos.ToListAsync();
         }
 
         // GET: api/ScholarshipInfoes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ScholarshipInfo>> GetScholarshipInfo(int id)
+        public async Task<ActionResult<ScholarshipInfo>> GetScholarshipInfo(Guid id)
         {
-            var scholarshipInfo = await _context.ScholarshipInfo.FindAsync(id);
+            var scholarshipInfo = await _context.ScholarshipInfos.FindAsync(id);
 
             if (scholarshipInfo == null)
             {
@@ -42,7 +45,7 @@ namespace EDUHUNT_BE.Controllers
         // PUT: api/ScholarshipInfoes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutScholarshipInfo(int id, ScholarshipInfo scholarshipInfo)
+        public async Task<IActionResult> PutScholarshipInfo(Guid id, ScholarshipInfo scholarshipInfo)
         {
             if (id != scholarshipInfo.Id)
             {
@@ -75,7 +78,7 @@ namespace EDUHUNT_BE.Controllers
         [HttpPost]
         public async Task<ActionResult<ScholarshipInfo>> PostScholarshipInfo(ScholarshipInfo scholarshipInfo)
         {
-            _context.ScholarshipInfo.Add(scholarshipInfo);
+            _context.ScholarshipInfos.Add(scholarshipInfo);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetScholarshipInfo", new { id = scholarshipInfo.Id }, scholarshipInfo);
@@ -83,23 +86,23 @@ namespace EDUHUNT_BE.Controllers
 
         // DELETE: api/ScholarshipInfoes/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteScholarshipInfo(int id)
+        public async Task<IActionResult> DeleteScholarshipInfo(Guid id)
         {
-            var scholarshipInfo = await _context.ScholarshipInfo.FindAsync(id);
+            var scholarshipInfo = await _context.ScholarshipInfos.FindAsync(id);
             if (scholarshipInfo == null)
             {
                 return NotFound();
             }
 
-            _context.ScholarshipInfo.Remove(scholarshipInfo);
+            _context.ScholarshipInfos.Remove(scholarshipInfo);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ScholarshipInfoExists(int id)
+        private bool ScholarshipInfoExists(Guid id)
         {
-            return _context.ScholarshipInfo.Any(e => e.Id == id);
+            return _context.ScholarshipInfos.Any(e => e.Id == id);
         }
     }
 }

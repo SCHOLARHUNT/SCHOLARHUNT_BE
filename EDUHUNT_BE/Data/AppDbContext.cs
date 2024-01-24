@@ -4,10 +4,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EDUHUNT_BE.Data
 {
-    public class AppDbContext(DbContextOptions options) : IdentityDbContext<ApplicationUser>(options)
+    public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        {
+        }
+
+        public DbSet<ScholarshipInfo> ScholarshipInfos { get; set; }
+        public DbSet<Message> Messages { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<ScholarshipInfo>(entity =>
             {
                 entity.HasKey(e => e.Id);
@@ -22,13 +31,18 @@ namespace EDUHUNT_BE.Data
                 // Additional configurations can be added here based on your requirements
             });
 
+            modelBuilder.Entity<Message>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Sender).HasMaxLength(255).IsRequired();
+                entity.Property(e => e.Receiver).HasMaxLength(255).IsRequired();
+                entity.Property(e => e.Content).IsRequired();
+                entity.Property(e => e.SentAt).IsRequired();
+
+                // Additional configurations for Message entity can be added here if needed
+            });
+
             // Additional configurations for other entities can be added here if needed
-
-            base.OnModelCreating(modelBuilder);
         }
-        public DbSet<EDUHUNT_BE.Model.ScholarshipInfo> ScholarshipInfo { get; set; }
     }
-
-
-
 }
