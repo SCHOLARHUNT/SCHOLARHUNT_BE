@@ -285,3 +285,4 @@ C:\diskD\code\PROJECT\EDUHUNT\BE\EDUHUNT_BE\EDUHUNT_BE\bin\Debug\net8.0\Microsof
 C:\diskD\code\PROJECT\EDUHUNT\BE\EDUHUNT_BE\EDUHUNT_BE\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Common.dll
 C:\diskD\code\PROJECT\EDUHUNT\BE\EDUHUNT_BE\EDUHUNT_BE\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Protocols.Json.dll
 C:\diskD\code\PROJECT\EDUHUNT\BE\EDUHUNT_BE\EDUHUNT_BE\bin\Debug\net8.0\Microsoft.Extensions.Features.dll
+C:\diskD\code\PROJECT\EDUHUNT\BE\EDUHUNT_BE\EDUHUNT_BE\bin\Debug\net8.0\OpenAI_API.dll

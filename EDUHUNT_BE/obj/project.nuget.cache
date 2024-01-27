@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "/g3IZ/FmyYoHUnNmeeWkV9LGUKY8z8P9lWAYTdSGPaQicLTaoo/H0DNxNCos+CUTT4cKAgj4rTyJJKhDI8xq6w==",
+  "dgSpecHash": "LT6+92mqGZlXm/WVoBx6Bs5apAJ18B8jP9TyYPTRF56AqYr/bDBY5BcV/tyWzU9ZZU+0eh6D8y1+yXJEvpqkyg==",
   "success": true,
   "projectFilePath": "C:\\diskD\\code\\PROJECT\\EDUHUNT\\BE\\EDUHUNT_BE\\EDUHUNT_BE\\EDUHUNT_BE.csproj",
   "expectedPackageFiles": [
@@ -110,6 +110,7 @@
     "C:\\Users\\anqua\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\anqua\\.nuget\\packages\\microsoft.extensions.dependencymodel\\8.0.0\\microsoft.extensions.dependencymodel.8.0.0.nupkg.sha512",
     "C:\\Users\\anqua\\.nuget\\packages\\microsoft.extensions.features\\8.0.1\\microsoft.extensions.features.8.0.1.nupkg.sha512",
+    "C:\\Users\\anqua\\.nuget\\packages\\microsoft.extensions.http\\2.1.0\\microsoft.extensions.http.2.1.0.nupkg.sha512",
     "C:\\Users\\anqua\\.nuget\\packages\\microsoft.extensions.identity.core\\8.0.1\\microsoft.extensions.identity.core.8.0.1.nupkg.sha512",
     "C:\\Users\\anqua\\.nuget\\packages\\microsoft.extensions.identity.stores\\8.0.1\\microsoft.extensions.identity.stores.8.0.1.nupkg.sha512",
     "C:\\Users\\anqua\\.nuget\\packages\\microsoft.extensions.logging\\8.0.0\\microsoft.extensions.logging.8.0.0.nupkg.sha512",
@@ -147,6 +148,7 @@
     "C:\\Users\\anqua\\.nuget\\packages\\nuget.projectmodel\\6.3.1\\nuget.projectmodel.6.3.1.nupkg.sha512",
     "C:\\Users\\anqua\\.nuget\\packages\\nuget.protocol\\6.3.1\\nuget.protocol.6.3.1.nupkg.sha512",
     "C:\\Users\\anqua\\.nuget\\packages\\nuget.versioning\\6.3.1\\nuget.versioning.6.3.1.nupkg.sha512",
+    "C:\\Users\\anqua\\.nuget\\packages\\openai\\1.10.0\\openai.1.10.0.nupkg.sha512",
     "C:\\Users\\anqua\\.nuget\\packages\\scrutor\\3.3.0\\scrutor.3.3.0.nupkg.sha512",
     "C:\\Users\\anqua\\.nuget\\packages\\selenium.webdriver\\4.16.2\\selenium.webdriver.4.16.2.nupkg.sha512",
     "C:\\Users\\anqua\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
