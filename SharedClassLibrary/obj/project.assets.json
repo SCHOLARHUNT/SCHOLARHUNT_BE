@@ -1142,19 +1142,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\anqua\\.nuget\\packages\\": {}
+    "C:\\Users\\ADMIN\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\diskD\\code\\PROJECT\\EDUHUNT\\BE\\EDUHUNT_BE\\SharedClassLibrary\\SharedClassLibrary.csproj",
+      "projectUniqueName": "D:\\Dev\\Course\\DUT_Hackathon_2024\\SCHOLARHUNT_BE\\SharedClassLibrary\\SharedClassLibrary.csproj",
       "projectName": "SharedClassLibrary",
-      "projectPath": "C:\\diskD\\code\\PROJECT\\EDUHUNT\\BE\\EDUHUNT_BE\\SharedClassLibrary\\SharedClassLibrary.csproj",
-      "packagesPath": "C:\\Users\\anqua\\.nuget\\packages\\",
-      "outputPath": "C:\\diskD\\code\\PROJECT\\EDUHUNT\\BE\\EDUHUNT_BE\\SharedClassLibrary\\obj\\",
+      "projectPath": "D:\\Dev\\Course\\DUT_Hackathon_2024\\SCHOLARHUNT_BE\\SharedClassLibrary\\SharedClassLibrary.csproj",
+      "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+      "outputPath": "D:\\Dev\\Course\\DUT_Hackathon_2024\\SCHOLARHUNT_BE\\SharedClassLibrary\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\anqua\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
