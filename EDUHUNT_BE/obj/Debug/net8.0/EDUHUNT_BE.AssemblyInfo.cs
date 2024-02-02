@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EDUHUNT_BE")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c36b403e541045c01550ccb6c0de6db3867f77f6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+023ed550fb946819f6ab191bfde9f0fba8f9cc2a")]
 [assembly: System.Reflection.AssemblyProductAttribute("EDUHUNT_BE")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EDUHUNT_BE")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

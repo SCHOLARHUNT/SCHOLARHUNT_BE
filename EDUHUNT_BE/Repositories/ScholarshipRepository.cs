@@ -9,6 +9,8 @@ using OpenAI_API;
 using OpenAI_API.Completions;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using Microsoft.Extensions.Options;
 public class ScholarshipRepository : IScholarship
 {
     private readonly AppDbContext _dbContext;
@@ -29,7 +31,7 @@ public class ScholarshipRepository : IScholarship
 
             return scholarships;
         }
-       
+
     }
     //public async Task<List<ScholarshipDTO>> GetScholarships()
     //{
@@ -70,18 +72,84 @@ public class ScholarshipRepository : IScholarship
         try
         {
             ScholarshipDTO newscholarship = new ScholarshipDTO();
-            var outputobject = "";
-            string prompt = $"read and answer budget(in class inline-block mr-4 text-sm text-gray-600 rounded), title (it is h1 or some tag biger than other), location, school name, level (Master or Bachelor or phd or ... in class inline-block mr-4 text-sm text-gray-600 rounded), is in site {html}";
+            string prompt = $"read and answer budget(in class inline-block mr-4 text-sm text-gray-600 rounded), title (in class text-3xl font-bold mb-4), location, university, level (Master or Bachelor or phd or ... in class inline-block mr-4 text-sm text-gray-600 rounded), is in site [{html}]";
 
-            var openAI = new OpenAIAPI("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");
-            
+            var openAI = new OpenAIAPI("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");
+
             var completions = await openAI.Completions.GetCompletion(prompt);
-           
+
 
             Console.WriteLine("==========================this is AI answer==========================");
             Console.WriteLine(completions);
 
-            return new ScholarshipDTO();
+            var budget = "0";
+            var title = "";
+            var location = "";
+            var university = "";
+            var level = "";
+
+            if (completions is not null)
+            {
+                var infoAsArray = completions.Split("\n").ToList();
+                title = infoAsArray[0];
+                /*for (int i = 0; i < infoAsArray.Count; i++)
+                {
+                    var infoContent = infoAsArray[i].Split(" ")[1];
+                    switch (infoAsArray[i].Split(" ")[0].ToLower()) {
+                        case "budget":
+                            // content for budget
+                            if (!infoContent.Contains("Not specified"))
+                            {
+                                var regexNum = new Regex("/d");
+                                var number = regexNum.Match(infoContent).Groups[0].Value;
+                                for(int j = 0; j<infoContent.Split(" ").Length; j++)
+                                {
+                                    if (infoContent.Split(" ")[j].Contains(number))
+                                    {
+                                        budget = infoContent.Split(" ")[j];
+                                    }
+                                }
+                            } 
+                            break;
+                        case "title":
+                            // content for title
+                            if (!infoContent.Contains("Not specified"))
+                            {
+                                title = infoContent;
+                            }
+                            break;
+                        case "location":
+                            // content for location
+                            if (!infoContent.Contains("Not specified"))
+                            {
+                                location = infoContent;
+                            }
+                            break;
+                        case "university":
+                            // content for university
+                            if (!infoContent.Contains("Not specified"))
+                            {
+                                university = infoContent;
+                            }
+                            break;
+                        case "level":
+                            // content for level
+                            if (!infoContent.Contains("Not specified"))
+                            {
+                                level = infoContent;
+                            }
+                            break;
+                    }
+                }*/
+            }
+
+            return new ScholarshipDTO
+            {
+                Title = title,
+                Location = completions,
+                School_name = university,
+                Level = level
+            };
         }
         catch (Exception ex)
         {
@@ -92,9 +160,12 @@ public class ScholarshipRepository : IScholarship
 
     private async Task<List<ScholarshipDTO>> Scrapingdata()
     {
-        using (var driver = new ChromeDriver())
+        var chromeOptions = new ChromeOptions();
+        chromeOptions.AddArgument("--ignore-certificate-errors-spki-list"); 
+        chromeOptions.AddArgument("--ignore-certificate-errors");
+        using (var driver = new ChromeDriver(chromeOptions))
         {
-            List<ScholarshipDTO> scholarships = new List<ScholarshipDTO>(); 
+            List<ScholarshipDTO> scholarships = new List<ScholarshipDTO>();
             try
             {
                 driver.Navigate().GoToUrl("https://www.scholarshipportal.com/");
@@ -103,29 +174,38 @@ public class ScholarshipRepository : IScholarship
 
                 // Find all div elements with class "flex md:w-1/3"
                 var scholarshipDivs = driver.FindElements(By.CssSelector("div.flex.md\\:w-1\\/3"));
-                var count = 0;
                 foreach (var scholarshipDiv in scholarshipDivs)
                 {
-                    count++;
-                    if ( count ==3)
-                    {
-                        await Task.Delay(20000);
-                        count = 0;
-                    }
                     var scholarshipLink = scholarshipDiv.FindElement(By.CssSelector("a"));
                     var scholarshipUrl = scholarshipLink.GetAttribute("href");
-
-                    
 
                     ((IJavaScriptExecutor)driver).ExecuteScript($"window.open('{scholarshipUrl}', '_blank');");
 
                     driver.SwitchTo().Window(driver.WindowHandles[^1]);
 
                     var mainElement = driver.FindElement(By.CssSelector("main.p-6.bg-white.rounded-t.shadow.sm\\:p-8.md\\:p-12"));
+                    //p - 6 bg - white rounded - t shadow sm:p - 8 md: p - 12
+                    //var mainElement = driver.FindElement(By.CssSelector("main.p-6.bg-white.rounded-t.shadow.sm:p-8.md:p-12"));
+                    //scholarships.Add(await UseOpenAIPromrt(mainElement.GetAttribute("outerHTML")));
 
-                    scholarships.Add(await UseOpenAIPromrt(mainElement.GetAttribute("outerHTML")));
+                    var title = mainElement.FindElement(By.CssSelector(".text-3xl.font-bold.mb-4")).Text;
+                    var level = mainElement.FindElement(By.CssSelector("ul > li:nth-child(1) > .inline-block.mr-4.text-sm.text-gray-600.rounded")).Text;
+                    var budget = mainElement.FindElement(By.CssSelector("ul > li:nth-child(2) > .inline-block.mr-4.text-sm.text-gray-600.rounded")).Text;
+                    var university = mainElement.FindElement(By.CssSelector(".rounded.bg-gray-100.p-6.flex.my-6 > div.flex-1 > h3 ")).Text;
+                    var url = mainElement.FindElement(By.CssSelector(".items-center.mt-4.mb-8.sm\\:flex > span > a")).GetAttribute("href");
 
-                
+                    scholarships.Add(
+                            new ScholarshipDTO
+                            {
+                                Budget = budget,
+                                Title = title,
+                                Level = level,
+                                School_name = university,
+                                Url = url
+                            }
+                        );
+
+                    await Task.Delay(20000);
 
                     driver.Close();
 
@@ -148,6 +228,6 @@ public class ScholarshipRepository : IScholarship
         }
 
 
-        
+
     }
 }
