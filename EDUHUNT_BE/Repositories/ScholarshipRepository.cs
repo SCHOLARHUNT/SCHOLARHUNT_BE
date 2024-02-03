@@ -73,7 +73,10 @@ public class ScholarshipRepository : IScholarship
             var outputobject = "";
             string prompt = $"read and answer budget(in class inline-block mr-4 text-sm text-gray-600 rounded), title (it is h1 or some tag biger than other), location, school name, level (Master or Bachelor or phd or ... in class inline-block mr-4 text-sm text-gray-600 rounded), is in site {html}";
 
-            var openAI = new OpenAIAPI("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");
+
+
+
+            var openAI = new OpenAIAPI("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");
             
             var completions = await openAI.Completions.GetCompletion(prompt);
            
